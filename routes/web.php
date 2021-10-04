@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Frontend\PagesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +14,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware(["auth"])->group(function(){
+    Route::get('/',[PagesController::class,"home"])->name("home");
 });
+
 
 ///admin-login
 Route::get('/admin/login',[LoginController::class,'login'])->name("admin.login");

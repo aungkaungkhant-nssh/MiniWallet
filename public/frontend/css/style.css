@@ -1,0 +1,74 @@
+/* backgrounColor=>#dfe6e9
+themeColor=>#a29bfe */
+body{
+    background-color: #dfe6e9;
+}
+a{
+    color:#000;
+    transition: all 0.5s;
+}
+a:hover{
+    color:#a29bfe;
+    text-decoration: none;
+}
+.content{
+    margin-top: 40px;
+}
+.card{
+    border-radius: 10px !important;
+    box-shadow:  0 1px 3px 0px rgba(0,0,0,0.09);
+}
+/************************ header menu *************************/
+.header-menu{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    z-index: 100;
+    padding: 8px;
+}   
+.header-menu h6{
+    font-size: 16px;
+}
+/************************ home page *************************/
+.home{
+    margin-top: 20px;
+}
+.home .rounded-img{
+    width: 50px;
+    border-radius: 100%;
+}
+.home img{
+    width: 30px;
+    margin-right: 2px;
+}
+.home h5{
+    font-size: 14px;
+    margin:5px 0px 2px 0px;
+}
+.home .user_amount{
+    font-size: 12px;
+}
+.home span{
+    font-size: 12px;
+}
+.home .function-box span{
+    font-size: 12px;
+}
+/************************ footer menu *************************/
+.footer-menu{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+}
+.footer-menu i{
+    margin-top: 15px;
+    
+}
+.footer-menu p{
+    font-size: 12px;
+    
+}
