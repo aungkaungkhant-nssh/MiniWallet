@@ -66,6 +66,13 @@ a:hover{
 .password-update img{
     width: 150px;
 }
+/************************ wallets *************************/
+.wallets h6{
+    font-size: 14px;
+}
+.wallets p{
+    font-size: 12px;
+}
 /************************ footer menu *************************/
 .footer-menu{
     position: fixed;

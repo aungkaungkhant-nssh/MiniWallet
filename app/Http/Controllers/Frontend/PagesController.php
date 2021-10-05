@@ -36,4 +36,8 @@ class PagesController extends Controller
         }
         return back()->withErrors(["old_password"=>"Current Password is invalid"])->withInput();
     }
+    public function wallets(){
+        $user=Auth::guard('web')->user();
+        return view("frontend.wallets",compact("user"));
+    }
 }

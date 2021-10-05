@@ -46,7 +46,7 @@
             <div class="col-md-8">
                 <div class="row">
                     <div class="col-4 text-center">
-                        <a href="{{route("wallet")}}">
+                        <a href="{{route("wallets")}}">
                             <i class="fas fa-wallet"></i>
                             <p class="mb-3">Wallets</p>
                         </a>

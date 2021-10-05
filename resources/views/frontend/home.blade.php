@@ -36,7 +36,7 @@
                             <i class="fas fa-arrow-alt-circle-right"></i>
                         </a>
                         <hr>
-                        <a href="" class="d-flex justify-content-between">
+                        <a href="{{route('wallets')}}" class="d-flex justify-content-between">
                             <div>
                                 <img src="{{asset('images/wallet.png')}}" alt="">
                                 <span>Wallet</span>

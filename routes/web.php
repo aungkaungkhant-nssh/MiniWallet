@@ -22,7 +22,7 @@ Route::middleware(["auth"])->group(function(){
     Route::get('/password-update',[PagesController::class,"passwordUpdate"])->name("password.upate");
     Route::post('/password-update-store',[PagesController::class,"passwordUpdateStore"])->name("password.update.store");
     //wallet
-    Route::get("/wallet",[PagesController::class,"wallet"])->name("wallet");
+    Route::get("/wallets",[PagesController::class,"wallets"])->name("wallets");
 });
 
 
