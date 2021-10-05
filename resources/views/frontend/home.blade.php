@@ -1,10 +1,11 @@
 @extends('frontend.layouts.app')
 @section('title',"Mini Wallet")
+@section('name',"Mini Wallet")
 @section('content')
     <div class="home">
         <div class="row">
             <div class="col-12 text-center">
-                    <img class="rounded-img" src="https://ui-avatars.com/api/?background=a29bfe&color=fff&name={{$user->name}}" alt="">
+                    <img class="rounded-img" src="https://ui-avatars.com/api/?background=a29bfe&color=fff&name={{$user->name}}" alt="" style="border-radius: 100%;width: 60px;">
                     <h5>{{$user->name}}</h5>
                     <p class="user_amount text-muted">{{number_format($user->wallets?$user->wallets->amount:"0")}} (MMK)</p>
             </div>

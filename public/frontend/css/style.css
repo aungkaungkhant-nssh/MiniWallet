@@ -10,9 +10,16 @@ a{
 a:hover{
     color:#a29bfe;
     text-decoration: none;
+   
 }
 .content{
-    margin-top: 40px;
+    margin-top: 60px;
+    margin-bottom: 160px;
+}
+.btn-theme{
+    background-color: #a29bfe ;
+    color:#fff;
+
 }
 .card{
     border-radius: 10px !important;
@@ -33,10 +40,9 @@ a:hover{
 }
 /************************ home page *************************/
 .home{
-    margin-top: 20px;
 }
-.home .rounded-img{
-    width: 50px;
+ .rounded-img{
+    width: 60px;
     border-radius: 100%;
 }
 .home img{
@@ -55,6 +61,10 @@ a:hover{
 }
 .home .function-box span{
     font-size: 12px;
+}
+/************************ password update *************************/
+.password-update img{
+    width: 150px;
 }
 /************************ footer menu *************************/
 .footer-menu{

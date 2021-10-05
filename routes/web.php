@@ -16,6 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 Route::middleware(["auth"])->group(function(){
     Route::get('/',[PagesController::class,"home"])->name("home");
+    Route::get('/profile',[PagesController::class,"profile"])->name("profile");
+
+    //password handle
+    Route::get('/password-update',[PagesController::class,"passwordUpdate"])->name("password.upate");
+    Route::post('/password-update-store',[PagesController::class,"passwordUpdateStore"])->name("password.update.store");
+    //wallet
+    Route::get("/wallet",[PagesController::class,"wallet"])->name("wallet");
 });
 
 
