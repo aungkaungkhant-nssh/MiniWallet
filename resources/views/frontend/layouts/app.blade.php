@@ -42,20 +42,31 @@
         </div>
      </div>  
     <div class="footer-menu">
+        <a href="" class="scan-tab">
+            <div class="inside">
+                <i class="fas fa-qrcode"></i>
+            </div>
+        </a>
         <div class="d-flex justify-content-center">
             <div class="col-md-8">
                 <div class="row">
-                    <div class="col-4 text-center">
+                    <div class="col-3 text-center">
+                        <a href="{{route('home')}}">
+                            <i class="fas fa-home"></i>
+                            <p>Home</p>
+                        </a>
+                    </div>
+                    <div class="col-3 text-center">
                         <a href="{{route("wallets")}}">
                             <i class="fas fa-wallet"></i>
                             <p class="mb-3">Wallets</p>
                         </a>
                     </div>
-                    <div class="col-4 text-center">
+                    <div class="col-3 text-center">
                         <i class="fas fa-exchange-alt"></i>
                         <p class="mb-3">Transcations</p>
                     </div>
-                    <div class="col-4 text-center">
+                    <div class="col-3 text-center">
                         <a href="{{url('/profile')}}">
                             <i class="fas fa-user"></i>
                             <p class="mb-3">Profile</p>

@@ -28,7 +28,7 @@
             <div class="col-12 mt-3">
                 <div class="card">
                     <div class="card-body function-box">
-                        <a href="" class="d-flex justify-content-between">
+                        <a href="{{route('transfer')}}" class="d-flex justify-content-between">
                             <div>
                                 <img src="{{asset('images/transfer.png')}}" alt="">
                                 <span>Transfer</span>
@@ -39,7 +39,7 @@
                         <a href="{{route('wallets')}}" class="d-flex justify-content-between">
                             <div>
                                 <img src="{{asset('images/wallet.png')}}" alt="">
-                                <span>Wallet</span>
+                                <span>Wallets</span>
                             </div>
                             <i class="fas fa-arrow-alt-circle-right"></i>
                         </a>
@@ -47,7 +47,7 @@
                         <a href="" class="d-flex justify-content-between">
                             <div>
                                 <img src="{{asset('images/transaction.png')}}" alt="">
-                                <span>Transaction</span>
+                                <span>Transactions</span>
                             </div>
                             <i class="fas fa-arrow-alt-circle-right"></i>
                         </a>
