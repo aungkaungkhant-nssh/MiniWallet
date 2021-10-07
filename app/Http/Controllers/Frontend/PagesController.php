@@ -178,4 +178,16 @@ class PagesController extends Controller
                "status"=>"fail"
            ]);
     }
+    public function transcations(Request $request){
+        
+        $transcations=Transcation::with("source")->orderBy("created_at","DESC")->where("user_id",auth()->user()->id);
+        if($request->date){
+            $transcations=$transcations->whereDate("created_at",$request->date);
+        }
+        if($request->type){
+            $transcations=$transcations->where("type",$request->type);
+        }
+        $transcations=$transcations->paginate(4);
+        return view("frontend.transcations",compact("transcations"));
+    }
 }

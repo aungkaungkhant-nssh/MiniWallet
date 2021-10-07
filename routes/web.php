@@ -33,6 +33,8 @@ Route::middleware(["auth"])->group(function(){
     Route::get("/phone-check",[PagesController::class,'phoneCheck']);
     //password check
     Route::get("/transfer/confirm/password-check",[PagesController::class,'passwordCheck']);
+    ///transcations
+    Route::get('/transcations',[PagesController::class,"transcations"])->name("transcations");
 });
 
 

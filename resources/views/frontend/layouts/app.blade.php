@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
     {{--font awesome--}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
+    {{--dateranger--}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
 <body>
     <div class="header-menu">
@@ -80,6 +82,11 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     {{-- sweet-alert --}}
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {{--jscroll--}}
+    <script src="{{asset('frontend/js/jscroll.js')}}"></script>
+    {{--dateranger--}}
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script>
         $(document).ready(function(){
             $.ajaxSetup({
