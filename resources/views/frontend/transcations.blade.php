@@ -42,32 +42,34 @@
         </div>
         <div class="infinite-scroll">
             @foreach ($transcations as $transcation)
-            <div class="card mb-2">
-                <div class="card-body">
-                   <div class="d-flex justify-content-between mb-0">
-                      <h6 class="mb-0">{{$transcation->trx_id}}</h6>
-                      <p
-                      class="
-                      @if($transcation->type===2)
-                      text-danger
-                      @else
-                      text-success
-                      @endif"
-                      >{{number_format($transcation->amount)}}<span>(MMK)</span></p>
-                   </div>
-                   <p class="text-muted mb-1">
-                       @if ($transcation->type===2)
-                          To <span>{{$transcation->source->name}}</span>
-                       @elseif($transcation->type===1)
-                          From
-                          <span>{{$transcation->source->name}}</span>
-                       @endif
-                   </p>
-                   <p class="text-muted">
-                       {{$transcation->created_at}}
-                   </p>
+            <a href="{{route('transcationsDetails',$transcation->trx_id)}}">
+                <div class="card mb-2">
+                    <div class="card-body">
+                       <div class="d-flex justify-content-between mb-0">
+                          <h6 class="mb-0">{{$transcation->trx_id}}</h6>
+                          <p
+                          class="
+                          @if($transcation->type===2)
+                          text-danger
+                          @else
+                          text-success
+                          @endif"
+                          >{{number_format($transcation->amount)}}<span>(MMK)</span></p>
+                       </div>
+                       <p class="text-muted mb-1">
+                           @if ($transcation->type===2)
+                              To <span>{{$transcation->source->name}}</span>
+                           @elseif($transcation->type===1)
+                              From
+                              <span>{{$transcation->source->name}}</span>
+                           @endif
+                       </p>
+                       <p class="text-muted">
+                           {{$transcation->created_at}}
+                       </p>
+                    </div>
                 </div>
-            </div>
+            </a>
             @endforeach
             {{$transcations->links()}}
         </div>

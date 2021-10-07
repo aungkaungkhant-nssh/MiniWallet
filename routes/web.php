@@ -35,6 +35,7 @@ Route::middleware(["auth"])->group(function(){
     Route::get("/transfer/confirm/password-check",[PagesController::class,'passwordCheck']);
     ///transcations
     Route::get('/transcations',[PagesController::class,"transcations"])->name("transcations");
+    Route::get("transcations-details/{trx_id}",[PagesController::class,"transcationsDetails"])->name("transcationsDetails");
 });
 
 

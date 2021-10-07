@@ -84,6 +84,10 @@ a:hover{
 .warning{
     color:red;
 }
+/************************ transcations details*************************/
+.transcations-details img{
+    width: 150px;
+}
 /************************ footer menu *************************/
 .footer-menu{
     position: fixed;

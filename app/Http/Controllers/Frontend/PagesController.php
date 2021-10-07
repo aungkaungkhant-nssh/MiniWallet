@@ -190,4 +190,9 @@ class PagesController extends Controller
         $transcations=$transcations->paginate(4);
         return view("frontend.transcations",compact("transcations"));
     }
+    public function transcationsDetails($trx_id){
+       $transcation=Transcation::where("trx_id",$trx_id)->first();
+       return view("frontend.transcationsDetails",compact("transcation"));
+
+    }
 }
