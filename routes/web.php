@@ -36,6 +36,8 @@ Route::middleware(["auth"])->group(function(){
     ///transcations
     Route::get('/transcations',[PagesController::class,"transcations"])->name("transcations");
     Route::get("transcations-details/{trx_id}",[PagesController::class,"transcationsDetails"])->name("transcationsDetails");
+    //recieve-qr
+    Route::get("recieve-qr",[PagesController::class,'recieveQr'])->name("recieve-qr");
 });
 
 

@@ -65,8 +65,11 @@
                         </a>
                     </div>
                     <div class="col-3 text-center">
-                        <i class="fas fa-exchange-alt"></i>
-                        <p class="mb-3">Transcations</p>
+                        <a href="{{route("transcations")}}">
+                            <i class="fas fa-exchange-alt"></i>
+                            <p class="mb-3">Transcations</p>
+                        </a>
+                 
                     </div>
                     <div class="col-3 text-center">
                         <a href="{{url('/profile')}}">

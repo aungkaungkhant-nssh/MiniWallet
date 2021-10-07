@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Helpers\UUIDGenerator;
+use Exception;
 use App\Models\User;
+use App\Models\Transcation;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\TransferRequest;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\UpdatePassword;
-use App\Models\Transcation;
-use Exception;
+use App\Helpers\UUIDGenerator;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UpdatePassword;
+use App\Http\Requests\TransferRequest;
 
 class PagesController extends Controller
 {
@@ -194,5 +194,8 @@ class PagesController extends Controller
        $transcation=Transcation::where("trx_id",$trx_id)->first();
        return view("frontend.transcationsDetails",compact("transcation"));
 
+    }
+    public function recieveQr(){
+        return view("frontend.recieve-qr");
     }
 }

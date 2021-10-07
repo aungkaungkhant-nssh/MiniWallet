@@ -18,12 +18,14 @@
                 </div>
             </div>
             <div class="col-6">
-                <div class="card">
-                    <div class="card-body p-2">
-                        <img src="{{asset("images/qr.png")}}" alt="">
-                        <span>Recieve QR</span>
+                <a href="{{route('recieve-qr')}}">
+                    <div class="card">
+                        <div class="card-body p-2">
+                            <img src="{{asset("images/qr.png")}}" alt="">
+                            <span>Recieve QR</span>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-12 mt-3">
                 <div class="card">
