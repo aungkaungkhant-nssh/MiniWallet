@@ -10,12 +10,15 @@
                     <p class="user_amount text-muted">{{number_format($user->wallets?$user->wallets->amount:"0")}} (MMK)</p>
             </div>
             <div class="col-6">
-                <div class="card">
-                    <div class="card-body p-2">
-                        <img src="{{asset("images/scan.png")}}" alt="">
-                        <span>Scan And Pay</span>
+                <a href="{{route("scanAndPay")}}">
+                    <div class="card">
+                        <div class="card-body p-2">
+                            <img src="{{asset("images/scan.png")}}" alt="">
+                            <span>Scan And Pay</span>
+                        </div>
                     </div>
-                </div>
+                </a>
+                
             </div>
             <div class="col-6">
                 <a href="{{route('recieve-qr')}}">

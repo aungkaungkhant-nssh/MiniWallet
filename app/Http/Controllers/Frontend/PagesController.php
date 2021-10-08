@@ -146,7 +146,7 @@ class PagesController extends Controller
             $to_transcations->source_id=$from_user->id;
             $to_transcations->save();
             DB::commit();
-            return redirect('/');
+            return redirect()->route("transcationsDetails",$from_transcations->trx_id)->with("create","SuccessFully Transfer");
         }catch(Exception $e){
             DB::rollBack();
             return back()->withErrors(['fail',$e->getMessage()]);
@@ -197,5 +197,110 @@ class PagesController extends Controller
     }
     public function recieveQr(){
         return view("frontend.recieve-qr");
+    }
+    public function scanAndPay(){
+        return view("frontend.scan-and-pay");
+    }
+    public function scanAndPayForm(Request $request){
+            $from_phone=Auth::guard("web")->user();
+            if($request->to_phone === $from_phone->phone){
+                return back()->withErrors(["fails"=>"Your Phone Number Not Found"])->withInput();
+            }
+            $to_phone=User::where("phone",$request->to_phone)->first();
+            return view("frontend.scan-and-pay-form",compact("from_phone","to_phone"));
+    }
+    public function scanAndPayConfirm(TransferRequest $request){
+        $from_user=Auth::guard('web')->user();
+        $to_user=User::where("phone",$request->to_phone)->first();
+
+        $hash_value=$request->hash_value;
+
+        $str=$request->to_phone.$request->amount.$request->description;
+        $hash2_value=hash_hmac('sha256', $str, 'akkmagicpaynssh@!');
+      
+        if($hash_value !==$hash2_value){
+            return back()->withErrors(["fail"=>"The given data is invalid"])->withInput();
+        }
+        if($from_user->phone === $request->to_phone){
+            return back()->withErrors(["to_phone"=>"Phone Number is not found"]);
+        }
+        if($from_user->wallets->amount < $request->amount){
+            return back()->withErrors(["amount"=>"You don't enough money"]);
+        }
+        if($request->amount<1000){
+            return back()->withErrors(["amount"=>"You are amount at least 1000(MMK)"]);
+        }
+        if(!$to_user){
+            return back()->withErrors(["to_phone"=>"Phone Number is not found"]);
+        }
+        $amount=$request->amount;
+        $description=$request->description;
+        return view("frontend.scanAndPayConfirm",compact("from_user","to_user","amount","description","hash2_value"));
+    }
+    public function scanAndPayComplete(TransferRequest $request){
+        $from_user=Auth::guard('web')->user();
+        $to_user=User::where("phone",$request->to_phone)->first();
+
+        $hash_value=$request->hash_value;
+
+        $str=$request->to_phone.$request->amount.$request->description;
+        $hash2_value=hash_hmac('sha256', $str, 'akkmagicpaynssh@!');
+      
+        if($hash_value !==$hash2_value){
+            return back()->withErrors(["fail"=>"The given data is invalid"]);
+        }
+        if($from_user->phone === $request->to_phone){
+            return back()->withErrors(["to_phone"=>"Phone Number is not found"]);
+        }
+        if($from_user->wallets->amount < $request->amount){
+            return back()->withErrors(["amount"=>"You don't enough money"]);
+        }
+        if($request->amount<1000){
+            return back()->withErrors(["amount"=>"You are amount at least 1000(MMK)"]);
+        }
+        if(!$to_user){
+            return back()->withErrors(["to_phone"=>"Phone Number is not found"]);
+        }
+        $amount=$request->amount;
+        $description=$request->description;
+        DB::beginTransaction();
+        try{
+            $from_user->wallets->decrement('amount',$amount);
+            $from_user->wallets->update();
+
+            $to_user->wallets->increment("amount",$amount);
+            $to_user->wallets->update();
+
+            //transcation
+            $ref_no=UUIDGenerator::refNumber();
+            //from user transcation
+          
+            $from_transcations=new Transcation();
+            $from_transcations->ref_id=$ref_no;
+            $from_transcations->trx_id=UUIDGenerator::trxNumber();
+            $from_transcations->user_id=$from_user->id;
+            $from_transcations->type=2;
+            $from_transcations->amount=$amount;
+            $from_transcations->description=$description;
+            $from_transcations->source_id=$to_user->id;
+            $from_transcations->save();
+
+            //to user transcation
+           
+            $to_transcations=new Transcation();
+            $to_transcations->ref_id=$ref_no;
+            $to_transcations->trx_id=UUIDGenerator::trxNumber();
+            $to_transcations->user_id=$to_user->id;
+            $to_transcations->type=1;
+            $to_transcations->amount=$amount;
+            $to_transcations->description=$description;
+            $to_transcations->source_id=$from_user->id;
+            $to_transcations->save();
+            DB::commit();
+            return redirect()->route("transcationsDetails",$from_transcations->trx_id)->with("create","SuccessFully Transfer");
+        }catch(Exception $e){
+            DB::rollBack();
+            return back()->withErrors(['fail',$e->getMessage()]);
+        }
     }
 }

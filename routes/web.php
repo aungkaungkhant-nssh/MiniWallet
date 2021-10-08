@@ -38,6 +38,11 @@ Route::middleware(["auth"])->group(function(){
     Route::get("transcations-details/{trx_id}",[PagesController::class,"transcationsDetails"])->name("transcationsDetails");
     //recieve-qr
     Route::get("recieve-qr",[PagesController::class,'recieveQr'])->name("recieve-qr");
+    Route::get("scan-and-pay",[PagesController::class,"scanAndPay"])->name("scanAndPay");
+    //scanandpay
+    Route::get('/scan-and-pay-form',[PagesController::class,"scanAndPayForm"])->name("scanAndPayForm");
+    Route::get('/scan-and-pay-confirm',[PagesController::class,'scanAndPayConfirm'])->name("scanAndPayConfirm");
+    Route::post("/scan-and-pay-complete",[PagesController::class,"scanAndPayComplete"])->name("scanAndPayComplete");
 });
 
 

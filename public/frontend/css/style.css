@@ -88,6 +88,10 @@ a:hover{
 .transcations-details img{
     width: 150px;
 }
+/************************ scanandpay*************************/
+.scanandpay img{
+    width: 180px;
+}
 /************************ footer menu *************************/
 .footer-menu{
     position: fixed;
