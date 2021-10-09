@@ -11,6 +11,7 @@
         "jenssegers/agent": "^2.6",
         "laravel/framework": "^8.54",
         "laravel/jetstream": "^2.4",
+        "laravel/passport": "^10.1",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.5",
@@ -31,7 +32,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files":[
+            "app/Helpers/ResponseHelper.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

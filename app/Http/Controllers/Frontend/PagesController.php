@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UpdatePassword;
 use App\Http\Requests\TransferRequest;
+use App\Notifications\GeneralNotification;
+use Illuminate\Support\Facades\Notification;
 
 class PagesController extends Controller
 {
@@ -37,6 +39,12 @@ class PagesController extends Controller
         if(Hash::check($old_password,$user->password)){
             $user->password=Hash::make($new_password);
             $user->update();
+            $title="Password Change!";
+            $message="Your account change password is successfull";
+            $sourceable_id=$user->id;
+            $sourceable_type=User::class;
+            $web_link=url("/profile");
+            Notification::send([$user],new GeneralNotification($title,$message,$sourceable_id,$sourceable_type,$web_link));
             return redirect()->route("profile")->with("update","Password Update Successfully");
         }
         return back()->withErrors(["old_password"=>"Current Password is invalid"])->withInput();
@@ -70,10 +78,10 @@ class PagesController extends Controller
                 return back()->withErrors(["fail"=>"The given data is invalid"]);
             }
             if($from_user->phone === $request->to_phone){
-                return back()->withErrors(["to_phone"=>"Phone Number is not found"]);
+                return back()->withErrors(["to_phone"=>"Phone Number is not found"])->withInput();
             }
             if($from_user->wallets->amount < $request->amount){
-                return back()->withErrors(["amount"=>"You don't enough money"]);
+                return back()->withErrors(["amount"=>"You don't enough money"])->withInput();
             }
             if($request->amount<1000){
                 return back()->withErrors(["amount"=>"You are amount at least 1000(MMK)"]);
@@ -145,6 +153,24 @@ class PagesController extends Controller
             $to_transcations->description=$description;
             $to_transcations->source_id=$from_user->id;
             $to_transcations->save();
+
+            //from noti
+            $title="E-money Transfered!";
+            $message="Your transfered".number_format($amount)." (MMK) to ".$to_user->name;
+            $sourceable_id=$from_transcations->id;
+            $sourceable_type=Transcation::class;
+            $web_link=url("/transcations-details/".$from_transcations->trx_id);
+            Notification::send([$from_user],new GeneralNotification($title,$message,$sourceable_id,$sourceable_type,$web_link));
+
+            //to noti
+            $title="E-money Transfered!";
+            $message="Your recieved".number_format($amount)." (MMK) from ".$from_user->name;
+            $sourceable_id=$to_transcations->id;
+            $sourceable_type=Transcation::class;
+            $web_link=url("/transcations-details/".$to_transcations->trx_id);
+            Notification::send([$to_user],new GeneralNotification($title,$message,$sourceable_id,$sourceable_type,$web_link)); 
+
+
             DB::commit();
             return redirect()->route("transcationsDetails",$from_transcations->trx_id)->with("create","SuccessFully Transfer");
         }catch(Exception $e){
@@ -296,6 +322,22 @@ class PagesController extends Controller
             $to_transcations->description=$description;
             $to_transcations->source_id=$from_user->id;
             $to_transcations->save();
+
+             //from noti
+             $title="E-money Transfered!";
+             $message="Your transfered".number_format($amount)." (MMK) to ".$to_user->name;
+             $sourceable_id=$from_transcations->id;
+             $sourceable_type=Transcation::class;
+             $web_link=url("/transcations-details/".$from_transcations->trx_id);
+             Notification::send([$from_user],new GeneralNotification($title,$message,$sourceable_id,$sourceable_type,$web_link));
+ 
+             //to noti
+             $title="E-money Transfered!";
+             $message="Your recieved".number_format($amount)." (MMK) from ".$from_user->name;
+             $sourceable_id=$to_transcations->id;
+             $sourceable_type=Transcation::class;
+             $web_link=url("/transcations-details/".$to_transcations->trx_id);
+             Notification::send([$to_user],new GeneralNotification($title,$message,$sourceable_id,$sourceable_type,$web_link)); 
             DB::commit();
             return redirect()->route("transcationsDetails",$from_transcations->trx_id)->with("create","SuccessFully Transfer");
         }catch(Exception $e){
@@ -303,4 +345,5 @@ class PagesController extends Controller
             return back()->withErrors(['fail',$e->getMessage()]);
         }
     }
+    
 }

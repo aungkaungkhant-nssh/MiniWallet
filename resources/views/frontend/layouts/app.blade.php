@@ -31,7 +31,14 @@
                         <div class="col-8 text-center">
                             <h6 class="mb-0">@yield('name')</h6>
                         </div>
-                        <div class="col-2 text-center"><i class="fas fa-bell"></i></div>
+                        <div class="col-2 text-center">
+                            <a href="{{route("notifications")}}">
+                                <i class="fas fa-bell"></i>
+                                <span class="badge badge-pill badge-danger unreadnotification">
+                                    {{$unread_notifications}}
+                                </span>
+                            </a>
+                        </div>
                     </div>
                 </div>
         </div>
@@ -44,7 +51,7 @@
         </div>
      </div>  
     <div class="footer-menu">
-        <a href="" class="scan-tab">
+        <a href="{{route('scanAndPay')}}" class="scan-tab">
             <div class="inside">
                 <i class="fas fa-qrcode"></i>
             </div>

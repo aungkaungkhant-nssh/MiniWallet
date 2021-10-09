@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Frontend\NotificationController;
 use App\Http\Controllers\Frontend\PagesController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,9 @@ Route::middleware(["auth"])->group(function(){
     Route::get('/scan-and-pay-form',[PagesController::class,"scanAndPayForm"])->name("scanAndPayForm");
     Route::get('/scan-and-pay-confirm',[PagesController::class,'scanAndPayConfirm'])->name("scanAndPayConfirm");
     Route::post("/scan-and-pay-complete",[PagesController::class,"scanAndPayComplete"])->name("scanAndPayComplete");
+    //notifications
+    Route::get("/notifications",[NotificationController::class,"index"])->name("notifications");
+    Route::get("/notifications-details/{id}",[NotificationController::class,"details"])->name("notificationDetails");
 });
 
 

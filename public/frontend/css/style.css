@@ -92,6 +92,19 @@ a:hover{
 .scanandpay img{
     width: 180px;
 }
+/************************notifications*************************/
+.notifications a{
+
+}
+.notifications a:hover{
+    color:#000;
+}
+.unreadnotification{
+    position: absolute;
+    top: -7px;
+    right: 20px;
+    padding: 4px;
+}
 /************************ footer menu *************************/
 .footer-menu{
     position: fixed;
@@ -134,4 +147,11 @@ a:hover{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+@media screen and (max-width:760px){
+    .unreadnotification{
+     
+        right: 3px;
+
+    }
 }
