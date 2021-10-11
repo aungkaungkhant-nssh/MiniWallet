@@ -13,7 +13,16 @@
         </div>
         </div>
 </div> 
-
+<div class="my-3">
+    <a href="{{url('/admin/wallet/add/amount')}}"  class="btn btn-success">
+        <i class="fas fa-plus-circle"></i>
+        Add Amount
+    </a>
+    <a href="{{url('/admin/wallet/reduce/amount')}}"  class="btn btn-warning">
+        <i class="fas fa-minus-circle"></i>
+        Reduce Amount
+    </a>
+</div>
 <div class="content">
     <div class="card">
         <div class="card-body">

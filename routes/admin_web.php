@@ -17,4 +17,8 @@ Route::prefix("/admin")->middleware(["auth:admin_user"])->name("admin.")->group(
     //wallet
     Route::get("/wallet/index",[WalletController::class,"index"])->name("wallet.index");
     Route::get("/wallet/datable/ssd",[WalletController::class,"ssd"]);
+    Route::get('/wallet/add/amount',[WalletController::class,"addAmount"]);
+    Route::post('/wallet/add/amount',[WalletController::class,"addAmountStore"]);
+    Route::get('/wallet/reduce/amount',[WalletController::class,"reduceAmount"]);
+    Route::post('/wallet/reduce/amount',[WalletController::class,"reduceAmountStore"]);
 });

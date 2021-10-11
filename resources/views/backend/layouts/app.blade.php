@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="  https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
 
     @yield('external-css')
+    {{--select 2--}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     {{--css--}}
     <link href="{{asset("backend/css/main.css")}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset("backend/css/style.css")}}">
@@ -331,6 +333,8 @@
 {{--datatable--}}
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+  {{--select 2--}}
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 {{--sweet-alert2--}}
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 {{--js validation--}}
