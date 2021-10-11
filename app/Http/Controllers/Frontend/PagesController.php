@@ -44,7 +44,11 @@ class PagesController extends Controller
             $sourceable_id=$user->id;
             $sourceable_type=User::class;
             $web_link=url("/profile");
-            Notification::send([$user],new GeneralNotification($title,$message,$sourceable_id,$sourceable_type,$web_link));
+            $deep_link=[
+                "target"=>"profile",
+                "parameter"=>null
+            ];
+            Notification::send([$user],new GeneralNotification($title,$message,$sourceable_id,$sourceable_type,$web_link,$deep_link));
             return redirect()->route("profile")->with("update","Password Update Successfully");
         }
         return back()->withErrors(["old_password"=>"Current Password is invalid"])->withInput();
@@ -159,8 +163,14 @@ class PagesController extends Controller
             $message="Your transfered".number_format($amount)." (MMK) to ".$to_user->name;
             $sourceable_id=$from_transcations->id;
             $sourceable_type=Transcation::class;
+            $deep_link=[
+                "target"=>"transcation_details",
+                "parameter"=>[
+                    "trx_id"=>$from_transcations->trx_id
+                ]
+               ];
             $web_link=url("/transcations-details/".$from_transcations->trx_id);
-            Notification::send([$from_user],new GeneralNotification($title,$message,$sourceable_id,$sourceable_type,$web_link));
+            Notification::send([$from_user],new GeneralNotification($title,$message,$sourceable_id,$sourceable_type,$web_link,$deep_link));
 
             //to noti
             $title="E-money Transfered!";
@@ -168,9 +178,13 @@ class PagesController extends Controller
             $sourceable_id=$to_transcations->id;
             $sourceable_type=Transcation::class;
             $web_link=url("/transcations-details/".$to_transcations->trx_id);
-            Notification::send([$to_user],new GeneralNotification($title,$message,$sourceable_id,$sourceable_type,$web_link)); 
-
-
+            $deep_link=[
+                "target"=>"transcation_details",
+                "parameter"=>[
+                    "trx_id"=>$to_transcations->trx_id
+                ]
+               ];
+            Notification::send([$to_user],new GeneralNotification($title,$message,$sourceable_id,$sourceable_type,$web_link,$deep_link));
             DB::commit();
             return redirect()->route("transcationsDetails",$from_transcations->trx_id)->with("create","SuccessFully Transfer");
         }catch(Exception $e){
@@ -329,7 +343,13 @@ class PagesController extends Controller
              $sourceable_id=$from_transcations->id;
              $sourceable_type=Transcation::class;
              $web_link=url("/transcations-details/".$from_transcations->trx_id);
-             Notification::send([$from_user],new GeneralNotification($title,$message,$sourceable_id,$sourceable_type,$web_link));
+             $deep_link=[
+                 "target"=>"transcation_details",
+                 "parameter"=>[
+                     "trx_id"=>$from_transcations->trx_id
+                 ]
+                ];
+             Notification::send([$from_user],new GeneralNotification($title,$message,$sourceable_id,$sourceable_type,$web_link,$deep_link));
  
              //to noti
              $title="E-money Transfered!";
@@ -337,7 +357,13 @@ class PagesController extends Controller
              $sourceable_id=$to_transcations->id;
              $sourceable_type=Transcation::class;
              $web_link=url("/transcations-details/".$to_transcations->trx_id);
-             Notification::send([$to_user],new GeneralNotification($title,$message,$sourceable_id,$sourceable_type,$web_link)); 
+             $deep_link=[
+                "target"=>"transcation_details",
+                "parameter"=>[
+                    "trx_id"=>$to_transcations->trx_id
+                ]
+               ];
+             Notification::send([$to_user],new GeneralNotification($title,$message,$sourceable_id,$sourceable_type,$web_link,$deep_link)); 
             DB::commit();
             return redirect()->route("transcationsDetails",$from_transcations->trx_id)->with("create","SuccessFully Transfer");
         }catch(Exception $e){

@@ -7,3 +7,10 @@ function success($message,$data){
         "data"=>$data
     ]);
 }
+function fail($message,$data){
+    return response()->json([
+        "status"=>"fail",
+        "message"=>$message,
+        "data"=>$data
+    ]);
+}
